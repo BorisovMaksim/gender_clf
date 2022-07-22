@@ -35,14 +35,11 @@ class AudioUtil:
         """ Generate a Mel Spectrogram given a pair (signal, sample rate)"""
         sig, sr = aud
 
-        # Using Mel Spectogram
-        # top_db = 80
-        # spec = transforms.MelSpectrogram(sr,  n_mels=64, n_fft=1024, hop_length=None)(sig.float())
-        # mel_spec = transforms.AmplitudeToDB(top_db=top_db).forward(spec)
+        top_db = 80
+        spec = transforms.MelSpectrogram(sr,  n_mels=64, n_fft=1024, hop_length=None)(sig.float())
+        mel_spec = transforms.AmplitudeToDB(top_db=top_db).forward(spec)
 
-        # Using MFCC
-        mfcc = transforms.MFCC(sample_rate=sr)(sig.float())
-        return mfcc
+        return mel_spec
 
 
     @staticmethod
