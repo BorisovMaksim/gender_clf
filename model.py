@@ -24,7 +24,7 @@ class AudioClassifier(nn.Module):
         init.kaiming_normal_(self.conv1.weight, a=0.1)
         self.conv1.bias.data.zero_()
 
-        conv_layers += [self.conv1, self.pool1, self.bn1, self.relu1]
+        conv_layers += [self.conv1, self.pool1, self.relu1, self.bn1, ]
 
         # Second Convolution Block
         self.conv2 = nn.Conv2d(8, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
@@ -34,12 +34,12 @@ class AudioClassifier(nn.Module):
         init.kaiming_normal_(self.conv2.weight, a=0.1)
         self.conv2.bias.data.zero_()
 
-        conv_layers += [self.conv2, self.pool2,   self.bn2, self.relu2]
+        conv_layers += [self.conv2, self.pool2, self.relu2,  self.bn2]
 
         # Linear Layers
         self.lin1 = nn.Linear(in_features=816, out_features=300)
         self.relu3 = nn.ReLU()
-        # self.drop1 = nn.Dropout(0.5)
+        self.drop1 = nn.Dropout(0.75)
         self.lin2 = nn.Linear(in_features=300, out_features=1)
         self.sigmoid = nn.Sigmoid()
 
@@ -56,7 +56,7 @@ class AudioClassifier(nn.Module):
 
         x = self.lin1(x)
         x = self.relu2(x)
-        # x = self.drop1(x)
+        x = self.drop1(x)
 
         x = self.lin2(x)
         x = self.sigmoid(x)

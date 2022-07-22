@@ -10,7 +10,7 @@ def main():
     train_dl, dev_dl, test_dl = loader.load_dataset()
     mymodel = AudioClassifier()
     train(mymodel, train_dl, num_epochs=5)
-    torch.save(mymodel.state_dict(), PATH + "batch_before_relu.pth")
+    torch.save(mymodel.state_dict(), PATH + "augment_spectrogram.pth")
     return 0
 
 if __name__ == '__main__':
