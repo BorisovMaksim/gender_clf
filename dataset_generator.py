@@ -27,7 +27,7 @@ class SoundDS(Dataset):
         dur_aud = AudioUtil.pad_trunc(aud, self.duration_seconds)
         noised_aud = AudioUtil.add_noise(dur_aud)
         sgram = AudioUtil.generate_spectrogram(noised_aud)
-
+        # Maybe will be interesting to use spectrogram augmentation in the future work
         # aug_sgram = AudioUtil.spectro_augment(sgram, max_mask_pct=0.1, n_freq_masks=2, n_time_masks=2)
 
         return sgram, label
